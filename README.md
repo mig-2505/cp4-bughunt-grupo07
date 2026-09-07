@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 1 / 12 |
+| **Total de bugs corrigidos** | 2 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -26,7 +26,7 @@
 | # | Sintoma observado (o que fiz/vi) | Causa raiz (arquivo e linha aproximada) | Correção aplicada | Conceito da disciplina |
 |---|---|---|---|---|
 | bug01 | Documentario e Serie sendo alugados por R$ 9,90 em vez do valor correto (Grátis e R$4,90/temp) | Classes Documentario.java e Serie.java não sobrescreviam o método de cálculo de preço da classe mãe | Implementei o @Override do método calcularPrecoAluguel() nas duas classes, retornando 0.0 para Documentário e 4.90 * numeroTemporadas para Série. | Herança, Polimorfismo e Sobrescrita de métodos |
-| bug02 | | | | |
+| bug02 | O preço promocional do Filme ficava mais caro que o normal | Filme.java (método aplicarPromocao): o cálculo multiplicava por 1.2 em vez de subtrair o desconto | Alterei o multiplicador de 1.2 para 0.8 | Operadores aritméticos |
 | bug03 | | | | |
 | bug04 | | | | |
 | bug05 | | | | |
