@@ -2,7 +2,7 @@
 
 ## Identificação
 
-**Grupo:** ___
+**Grupo:** Grupo 7
 
 | Integrante | RM      | Turma  |
 |------------|---------|--------|
@@ -14,7 +14,7 @@
 | Campo | |
 |---|---|
 | **Total de bugs corrigidos** | ___ / 12 |
-| **Total de ajustes de Clean Code** | ___ / 6 |
+| **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
 
@@ -42,7 +42,7 @@
 
 | # | Onde estava | Qual princípio/boas práticas era violado | O que eu mudei |
 |---|---|---|---|
-| clean01 | | | |
+| clean01 | Classe Conteudo (método calcularPrecoAluguel()) | Violação de Abstração e Polimorfismo | Transformei o método calcularPrecoAluguel() em abstract e removi seu corpo |
 | clean02 | | | |
 | clean03 | | | |
 | clean04 | | | |
