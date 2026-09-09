@@ -91,12 +91,23 @@ propósito entre as duas nesse projeto e o que mudaria no código se o Document�
 passasse a ter promoções — quais classes/linhas seriam tocadas e quais ficariam
 intactas? O que isso diz sobre o design do sistema?
 
+## Respostas das Perguntas:
+### Pergunta 1:
+O Spring usa o @Autowired para criar e gerenciar os objetos pra gente. Se a gente usasse new ConteudoRepository(), ia dar erro na hora, porque o repositório é uma interface, e o Java não deixa dar new em interfaces. Ao injetar o bean, o Spring cria a classe concreta por trás dos panos, conecta com o banco de dados e já entrega o objeto pronto pro Controller usar, sem a gente ter que configurar essa conexão na mão toda vez
+
+### Pergunta 2:
+O Spring Data JPA automatiza o código grande e repetitivo, como abrir conexão e escrever comandos SQL na mão. O JDBC dá mais trabalho por ser manual, mas ele ainda é melhor quando precisamos fazer consultas no banco que são muito complexas e precisam de performance específica. Já o método findByCategoria funciona sozinho no JPA por causa das "Derived Queries": o Spring lê o nome do método e, por ele seguir um padrão, já monta um SELECT filtrando pela coluna categoria automaticamente
+
+### Pergunta 3:
+A classe Exception é "checked", o que obriga o código a ter um try/catch. Isso atrapalhava o Spring, fazendo ele travar e devolver um erro 500 genérico. Quando mudamos para RuntimeException (unchecked), o código não exige mais o try/catch. Assim, a exceção fica livre para subir direto para o arquivo GlobalExceptionHandler. É lá que esse handler pega a mensagem da regra de classificação indicativa e devolve a resposta formatada corretamente pro usuário da API
+
+### Pergunta 4:
+A sobrescrita mantém os mesmos parâmetros do método da classe mãe para apenas mudar o que ele faz. A sobrecarga muda os parâmetros, criando um método diferente na classe. O bug na Serie aconteceu porque os parâmetros estavam diferentes, gerando uma sobrecarga sem querer, com isso, o Java rodou o cálculo da classe mãe em vez do da filha. Se tivessem usado a anotação @Override, o código nem ia compilar, pois o Java ia avisar na hora que os parâmetros não batiam
+
+### Pergunta 5:
+Nós blindamos no construtor para impedir que o objeto seja criado com dados inválidos. Blindamos no setter para garantir que ninguém coloque um valor errado no atributo depois que o objeto já foi instanciado. E as validações de regras de negócio, como ver se o saldo é negativo, ficam dentro dos métodos específicos, como o alugar(). Fazer isso só no construtor não resolve, porque o setter ficaria aberto para receber dados inválidos logo em seguida
+
+### Pergunta 6:
+A classe abstrata Conteudo serve para agrupar atributos em comum (como título e duração) para as classes filhas herdarem e não repetirem código. A interface Promocionavel serve para definir um contrato obrigatório de comportamento, ou seja, quem assina tem que implementar o método do desconto. Se o Documentario ganhasse promoção, bastaria colocar um implements Promocionavel nele e escrever a regra do desconto. O resto do código (mãe e as outras filhas) ficaria totalmente intacto, mostrando que o código é bem estruturado
+
 ---
-
-## Parte 4 — Espaço livre (opcional)
-
-Alguma dificuldade, dúvida ou comentário sobre o checkpoint?
-
-```
-
-```
