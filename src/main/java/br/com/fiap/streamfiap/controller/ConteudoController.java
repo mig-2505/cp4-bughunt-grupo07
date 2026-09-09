@@ -28,15 +28,11 @@ public class ConteudoController {
 
     // GET /api/conteudos/{id} - Buscar por ID
     @GetMapping("/{id}")
-    public Conteudo buscarPorId(@PathVariable Long id) {
-        try {
-            Conteudo conteudo = conteudoRepository.findById(id)
-                    .orElseThrow(() -> new ConteudoNaoEncontradoException("Conteúdo não encontrado: " + id));
-            return ResponseEntity.ok(conteudo).getBody();
-        } catch (Exception e) {
-            // TODO: tratar isso depois
-        }
-        return null;
+    public ResponseEntity<Conteudo> buscarPorId(@PathVariable Long id) {
+        Conteudo conteudo = conteudoRepository.findById(id)
+                .orElseThrow(() -> new ConteudoNaoEncontradoException("Conteúdo não encontrado: " + id));
+
+        return ResponseEntity.ok(conteudo);
     }
 
     // GET /api/conteudos/categoria/{categoria} - Buscar por categoria
@@ -70,8 +66,9 @@ public class ConteudoController {
     // POST /api/conteudos/serie - cadastra uma série
     @PostMapping("/serie")
     public ResponseEntity<Serie> cadastrarSerie(@RequestBody Serie serie) {
-        Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.duracaoMinutos,
-                serie.getClassificacaoEtaria(), serie.getNumeroTemporadas());
+        // CORREÇÃO: Usando getDuracaoMinutos() e passando o serie.isDisponivel()
+        Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.getDuracaoMinutos(),
+                serie.getClassificacaoEtaria(), serie.isDisponivel(), serie.getNumeroTemporadas());
         return ResponseEntity.status(201).body(conteudoRepository.save(nova));
     }
 
