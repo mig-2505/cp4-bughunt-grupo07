@@ -26,36 +26,27 @@ public class Usuario {
     }
 
     public boolean temCreditosSuficientes(double preco) {
-        return this.creditos >= preco; // Lógica invertida
+        return this.creditos >= preco;
     }
 
     public void debitarCreditos(double valor) {
-        // adiciona o valor aos créditos do usuário
         this.creditos = this.creditos - valor;
     }
 
-    public Usuario alugar(Conteudo c) throws ClassificacaoIndicativaException {
-        if (!c.isDisponivel()) {
-            throw new br.com.fiap.streamfiap.exception.ConteudoIndisponivelException(c.getTitulo() + " não está disponível para aluguel");
+    public Usuario alugar(Conteudo conteudo) throws ClassificacaoIndicativaException {
+        if (!conteudo.isDisponivel()) {
+            throw new br.com.fiap.streamfiap.exception.ConteudoIndisponivelException(conteudo.getTitulo() + " não está disponível para aluguel");
         }
 
-        double p = c.calcularPrecoAluguel();
+        double preco = conteudo.calcularPrecoAluguel();
 
-        if (!temCreditosSuficientes(p)) {
-            throw new CreditosInsuficientesException("Créditos insuficientes para alugar " + c.getTitulo());
+        if (!temCreditosSuficientes(preco)) {
+            throw new CreditosInsuficientesException("Créditos insuficientes para alugar " + conteudo.getTitulo());
         }
 
-        debitarCreditos(p);
-        c.setDisponivel(false);
+        debitarCreditos(preco);
+        conteudo.setDisponivel(false);
 
-        System.out.println("==================================================");
-        System.out.println("RECIBO STREAMFIAP");
-        System.out.println("Usuario: " + this.nome);
-        System.out.println("Conteudo: " + c.getTitulo());
-        System.out.println("Valor pago: R$ " + p);
-        System.out.println("Creditos restantes: R$ " + this.creditos);
-        System.out.println("Obrigado por usar o StreamFIAP!");
-        System.out.println("==================================================");
 
         return this;
     }
