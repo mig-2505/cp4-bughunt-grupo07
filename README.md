@@ -14,7 +14,7 @@
 | Campo | |
 |---|---|
 | **Total de bugs corrigidos** | 12 / 12 |
-| **Total de ajustes de Clean Code** | 4 / 6 |
+| **Total de ajustes de Clean Code** | 5 / 6 |
 
 ---
 
@@ -46,7 +46,7 @@
 | clean02 | Conteudo.java (public int duracaoMinutos) | Encapsulamento. Atributos não devem ficar expostos | Alterado o modificador de acesso de public para private |
 | clean03 | Usuario.java (método alugar) | Nomes sem significado (Clean Names). Variáveis p e c não explicavam o contexto | Renomeei c para conteudo e p para preco |
 | clean04 | Usuario.java (método alugar) | Responsabilidade Única (SRP). Classes de Model não devem fazer I/O (imprimir no console) | Apaguei todo o bloco de System.out.println |
-| clean05 | | | |
+| clean05 | AluguelController.java (método alugar) | Uso inseguro de classe Optional. O uso direto de .get() pode causar um NoSuchElementException e quebrar a aplicação caso o registro não exista no banco | Substituí o .get() por .orElseThrow(), garantindo que uma exceção controlada seja lançada |
 | clean06 | | | |
 
 ---
