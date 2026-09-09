@@ -25,6 +25,11 @@ public class Filme extends Conteudo implements Promocionavel {
         return preco * 0.8;
     }
 
+    @Override
+    public double calcularPrecoPromocional() {
+        return aplicarPromocao(calcularPrecoAluguel());
+    }
+
     public boolean isEstreia() { return estreia; }
     public void setEstreia(boolean estreia) { this.estreia = estreia; }
 }
