@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,7 +25,7 @@ public class ConteudoController {
         return conteudoRepository.findAll();
     }
 
-    // GET /api/conteudos/{id} - Buscar por ID
+    // BUG 10 CORRIGIDO: Sem try/catch e retornando ResponseEntity
     @GetMapping("/{id}")
     public ResponseEntity<Conteudo> buscarPorId(@PathVariable Long id) {
         Conteudo conteudo = conteudoRepository.findById(id)
@@ -35,7 +34,7 @@ public class ConteudoController {
         return ResponseEntity.ok(conteudo);
     }
 
-    // GET /api/conteudos/categoria/{categoria} - Buscar por categoria
+    // BUG 11 CORRIGIDO: Usando findByCategoria() do Spring Data
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<Conteudo>> listarPorCategoria(@PathVariable String categoria) {
         List<Conteudo> filtrados = conteudoRepository.findByCategoria(categoria);
@@ -50,10 +49,11 @@ public class ConteudoController {
         return conteudo.calcularPrecoPromocional();
     }
 
-    // POST /api/conteudos/filme - cadastra um filme (cria nova instância sem o id vindo do cliente)
+    // POST /api/conteudos/filme - cadastra um filme
     @PostMapping("/filme")
     public ResponseEntity<Filme> cadastrarFilme(@RequestBody Filme filme) {
-        Filme novo = new Filme(filme.getTitulo(), filme.getCategoria(), filme.duracaoMinutos,
+        // CORREÇÃO: filme.getDuracaoMinutos() em vez de filme.duracaoMinutos
+        Filme novo = new Filme(filme.getTitulo(), filme.getCategoria(), filme.getDuracaoMinutos(),
                 filme.getClassificacaoEtaria(), filme.isDisponivel(), filme.isEstreia());
         return ResponseEntity.status(201).body(conteudoRepository.save(novo));
     }
@@ -61,7 +61,7 @@ public class ConteudoController {
     // POST /api/conteudos/serie - cadastra uma série
     @PostMapping("/serie")
     public ResponseEntity<Serie> cadastrarSerie(@RequestBody Serie serie) {
-        // CORREÇÃO: Usando getDuracaoMinutos() e passando o serie.isDisponivel()
+        // CORREÇÃO: serie.getDuracaoMinutos() e serie.isDisponivel()
         Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.getDuracaoMinutos(),
                 serie.getClassificacaoEtaria(), serie.isDisponivel(), serie.getNumeroTemporadas());
         return ResponseEntity.status(201).body(conteudoRepository.save(nova));
@@ -70,24 +70,10 @@ public class ConteudoController {
     // POST /api/conteudos/documentario - cadastra um documentário
     @PostMapping("/documentario")
     public ResponseEntity<Documentario> cadastrarDocumentario(@RequestBody Documentario documentario) {
+        // CORREÇÃO: documentario.getDuracaoMinutos() em vez de documentario.duracaoMinutos
         Documentario novo = new Documentario(documentario.getTitulo(), documentario.getCategoria(),
-                documentario.duracaoMinutos, documentario.getClassificacaoEtaria(),
+                documentario.getDuracaoMinutos(), documentario.getClassificacaoEtaria(),
                 documentario.isDisponivel(), documentario.getTema());
         return ResponseEntity.status(201).body(conteudoRepository.save(novo));
     }
-
-    // código do protótipo antigo — mantido aqui caso o time de marketing volte atrás
-    private double calcularDescontoAntigo(double preco) {
-        double desconto = 0.0;
-        if (preco >= 10.0) {
-            desconto = preco * 0.1;
-        }
-        return preco - desconto;
-    }
-
-    // TODO: reativar quando confirmarem a regra de cupons (não apagar, pode ser útil)
-    // if (usuario.temCupomAtivo()) {
-    //     preco = preco - 5.0;
-    //     aplicarPromocao();
-    // }
 }
