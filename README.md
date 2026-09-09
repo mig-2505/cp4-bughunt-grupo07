@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 4 / 12 |
+| **Total de bugs corrigidos** | 5 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -29,7 +29,7 @@
 | bug02 | O preço promocional do Filme ficava mais caro que o normal | Filme.java (método aplicarPromocao): o cálculo multiplicava por 1.2 em vez de subtrair o desconto | Alterei o multiplicador de 1.2 para 0.8 | Operadores aritméticos |
 | bug03 | Ao cadastrar uma Série, os dados base (título, categoria, etc.) não eram salvos | Serie.java (Construtor): Os parâmetros eram recebidos, mas ignorados e não eram repassados à classe mãe | Adicionei a chamada super() no construtor repassando os atributos para a superclasse Conteudo | Construtores, Herança e uso do super() |
 | bug04 | Usuário não salva no banco (erro de ID nulo) | Usuario.java: Faltava a anotação para gerar o ID automaticamente | Adicionado @GeneratedValue(strategy = GenerationType.IDENTITY) no atributo id | JPA e Mapeamento de Entidades |
-| bug05 | | | | |
+| bug05 | Ao cadastrar o usuário, o nome ficava null no banco | Usuario.java: No construtor, estava nome = nome; omitindo o this | Alterado para this.nome = nome; | Construtores e uso do this |
 | bug06 | | | | |
 | bug07 | | | | |
 | bug08 | | | | |
