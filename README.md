@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 6 / 12 |
+| **Total de bugs corrigidos** | 7 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -31,7 +31,7 @@
 | bug04 | Usuário não salva no banco (erro de ID nulo) | Usuario.java: Faltava a anotação para gerar o ID automaticamente | Adicionado @GeneratedValue(strategy = GenerationType.IDENTITY) no atributo id | JPA e Mapeamento de Entidades |
 | bug05 | Ao cadastrar o usuário, o nome ficava null no banco | Usuario.java: No construtor, estava nome = nome; omitindo o this | Alterado para this.nome = nome; | Construtores e uso do this |
 | bug06 | O sistema permitia alugar conteúdos mesmo sem saldo, deixando créditos negativos | Usuario.java: A validação estava preco >= this.creditos (lógica invertida) | Corrigido para this.creditos >= preco; | Operadores relacionais e lógica booleana |
-| bug07 | | | | |
+| bug07 | O sistema efetivava aluguel de conteúdos com disponivel = false | Usuario.java (método alugar): Não havia validação de disponibilidade | Adicionado um if(!c.isDisponivel()) estourando a exceção devida | Regras de negócio e lançamento de Exceções |
 | bug08 | | | | |
 | bug09 | | | | |
 | bug10 | | | | |
