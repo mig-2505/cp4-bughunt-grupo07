@@ -37,14 +37,9 @@ public class ConteudoController {
 
     // GET /api/conteudos/categoria/{categoria} - Buscar por categoria
     @GetMapping("/categoria/{categoria}")
-    public List<Conteudo> listarPorCategoria(@PathVariable String categoria) {
-        List<Conteudo> resultado = new ArrayList<>();
-        for (Conteudo c : conteudoRepository.findAll()) {
-            if (c.getCategoria() == categoria) {
-                resultado.add(c);
-            }
-        }
-        return resultado;
+    public ResponseEntity<List<Conteudo>> listarPorCategoria(@PathVariable String categoria) {
+        List<Conteudo> filtrados = conteudoRepository.findByCategoria(categoria);
+        return ResponseEntity.ok(filtrados);
     }
 
     // GET /api/conteudos/{id}/preco-promocional - Preço com promoção
