@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 7 / 12 |
+| **Total de bugs corrigidos** | 8 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -32,7 +32,7 @@
 | bug05 | Ao cadastrar o usuário, o nome ficava null no banco | Usuario.java: No construtor, estava nome = nome; omitindo o this | Alterado para this.nome = nome; | Construtores e uso do this |
 | bug06 | O sistema permitia alugar conteúdos mesmo sem saldo, deixando créditos negativos | Usuario.java: A validação estava preco >= this.creditos (lógica invertida) | Corrigido para this.creditos >= preco; | Operadores relacionais e lógica booleana |
 | bug07 | O sistema efetivava aluguel de conteúdos com disponivel = false | Usuario.java (método alugar): Não havia validação de disponibilidade | Adicionado um if(!c.isDisponivel()) estourando a exceção devida | Regras de negócio e lançamento de Exceções |
-| bug08 | | | | |
+| bug08 | A API aceitava cadastrar conteúdo com duração menor ou igual a zero | Conteudo.java: Falta de validação no construtor e no setter | Adicionado if (duracaoMinutos <= 0) lançando exceção | Blindagem de objetos / Validação de estado |
 | bug09 | | | | |
 | bug10 | | | | |
 | bug11 | | | | |
