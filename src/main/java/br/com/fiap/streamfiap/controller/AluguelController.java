@@ -1,7 +1,6 @@
 package br.com.fiap.streamfiap.controller;
 
 import br.com.fiap.streamfiap.exception.ClassificacaoIndicativaException;
-import br.com.fiap.streamfiap.exception.ConteudoNaoEncontradoException;
 import br.com.fiap.streamfiap.model.Conteudo;
 import br.com.fiap.streamfiap.model.Usuario;
 import br.com.fiap.streamfiap.repository.ConteudoRepository;
@@ -24,14 +23,15 @@ public class AluguelController {
     @PostMapping
     public ResponseEntity<Usuario> alugar(@RequestParam Long usuarioId, @RequestParam Long conteudoId)
             throws ClassificacaoIndicativaException {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + usuarioId));
-        Conteudo conteudo = conteudoRepository.findById(conteudoId)
-                .orElseThrow(() -> new ConteudoNaoEncontradoException("Conteúdo não encontrado: " + conteudoId));
 
-        Usuario usuarioAtualizado = usuario.alugar(conteudo);
+        Usuario usuario = usuarioRepository.findById(usuarioId).get();
+        Conteudo conteudo = conteudoRepository.findById(conteudoId).get();
+
+        usuario.alugar(conteudo);
 
         conteudoRepository.save(conteudo);
-        return ResponseEntity.ok(usuarioRepository.save(usuarioAtualizado));
+        usuarioRepository.save(usuario);
+
+        return ResponseEntity.ok(usuario);
     }
 }
