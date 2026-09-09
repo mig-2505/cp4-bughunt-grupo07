@@ -26,7 +26,7 @@ public class Usuario {
     }
 
     public boolean temCreditosSuficientes(double preco) {
-        return preco >= this.creditos;
+        return this.creditos >= preco; // Lógica invertida
     }
 
     public void debitarCreditos(double valor) {
