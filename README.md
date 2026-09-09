@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 11 / 12 |
+| **Total de bugs corrigidos** | 12 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -36,7 +36,7 @@
 | bug09 | Erro de idade retornava status 500 (Internal Server Error) genérico | ClassificacaoIndicativaException.java: Estava herdando de Exception (Checked), bloqueando o Handler do Spring | Alterado para estender RuntimeException | Exceções |
 | bug10 | Buscar ID inexistente (ex: 999) devolvia status 200 vazio em vez de erro | ConteudoController.java: Havia um bloco try/catch vazio que engolia a exceção | Removido o try/catch para que a exceção suba ao GlobalExceptionHandler | Tratamento de Exceções em Controllers |
 | bug11 | Busca por categoria não filtrava corretamente e trazia todos os resultados | ConteudoController.java: O método listarPorCategoria usava .findAll() e comparava Strings incorretamente com == | Alterado para usar conteudoRepository.findByCategoria(categoria), delegando o filtro para o banco | Spring Data JPA |
-| bug12 | | | | |
+| bug12 | O aluguel dava sucesso na resposta, mas não atualizava os créditos no banco | AluguelController.java: A alteração era feita na memória, mas não chamava o save() | Adicionados usuarioRepository.save(u) e conteudoRepository.save(c) | Persistência e ciclo de vida de Entidades JPA |
 
 ## Parte 2 — Ajustes de Clean Code
 
