@@ -14,7 +14,7 @@
 | Campo | |
 |---|---|
 | **Total de bugs corrigidos** | 12 / 12 |
-| **Total de ajustes de Clean Code** | 5 / 6 |
+| **Total de ajustes de Clean Code** | 6 / 6 |
 
 ---
 
@@ -47,7 +47,7 @@
 | clean03 | Usuario.java (método alugar) | Nomes sem significado (Clean Names). Variáveis p e c não explicavam o contexto | Renomeei c para conteudo e p para preco |
 | clean04 | Usuario.java (método alugar) | Responsabilidade Única (SRP). Classes de Model não devem fazer I/O (imprimir no console) | Apaguei todo o bloco de System.out.println |
 | clean05 | AluguelController.java (método alugar) | Uso inseguro de classe Optional. O uso direto de .get() pode causar um NoSuchElementException e quebrar a aplicação caso o registro não exista no banco | Substituí o .get() por .orElseThrow(), garantindo que uma exceção controlada seja lançada |
-| clean06 | | | |
+| clean06 | Conteudo.java (método calcularPrecoPromocional) | Princípio Aberto/Fechado (OCP - SOLID). A superclasse usava instanceof para descobrir o comportamento das subclasses, criando alto acoplamento | Removi o instanceof da classe mãe, deixando-a retornar apenas o preço padrão. Usei polimorfismo, adicionando @Override nas classes filhas (Filme e Serie) para que elas mesmas apliquem o método aplicarPromocao() |
 
 ---
 
