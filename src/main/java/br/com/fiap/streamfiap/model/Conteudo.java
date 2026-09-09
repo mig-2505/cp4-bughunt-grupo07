@@ -24,6 +24,7 @@ public abstract class Conteudo {
     protected Conteudo(String titulo, String categoria, int duracaoMinutos, int classificacaoEtaria, boolean disponivel) {
         this.titulo = titulo;
         this.categoria = categoria;
+        if (duracaoMinutos <= 0) throw new IllegalArgumentException("Duração deve ser maior que zero.");
         this.duracaoMinutos = duracaoMinutos;
         this.classificacaoEtaria = classificacaoEtaria;
         this.disponivel = disponivel;
@@ -50,7 +51,10 @@ public abstract class Conteudo {
     public void setCategoria(String categoria) { this.categoria = categoria; }
 
     public int getDuracaoMinutos() { return duracaoMinutos; }
-    public void setDuracaoMinutos(int duracaoMinutos) { this.duracaoMinutos = duracaoMinutos; }
+    public void setDuracaoMinutos(int duracaoMinutos) {
+        if (duracaoMinutos <= 0) throw new IllegalArgumentException("Duração deve ser maior que zero.");
+        this.duracaoMinutos = duracaoMinutos;
+    }
 
     public int getClassificacaoEtaria() { return classificacaoEtaria; }
     public void setClassificacaoEtaria(int classificacaoEtaria) { this.classificacaoEtaria = classificacaoEtaria; }
