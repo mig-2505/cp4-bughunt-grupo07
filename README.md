@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 5 / 12 |
+| **Total de bugs corrigidos** | 6 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -30,7 +30,7 @@
 | bug03 | Ao cadastrar uma Série, os dados base (título, categoria, etc.) não eram salvos | Serie.java (Construtor): Os parâmetros eram recebidos, mas ignorados e não eram repassados à classe mãe | Adicionei a chamada super() no construtor repassando os atributos para a superclasse Conteudo | Construtores, Herança e uso do super() |
 | bug04 | Usuário não salva no banco (erro de ID nulo) | Usuario.java: Faltava a anotação para gerar o ID automaticamente | Adicionado @GeneratedValue(strategy = GenerationType.IDENTITY) no atributo id | JPA e Mapeamento de Entidades |
 | bug05 | Ao cadastrar o usuário, o nome ficava null no banco | Usuario.java: No construtor, estava nome = nome; omitindo o this | Alterado para this.nome = nome; | Construtores e uso do this |
-| bug06 | | | | |
+| bug06 | O sistema permitia alugar conteúdos mesmo sem saldo, deixando créditos negativos | Usuario.java: A validação estava preco >= this.creditos (lógica invertida) | Corrigido para this.creditos >= preco; | Operadores relacionais e lógica booleana |
 | bug07 | | | | |
 | bug08 | | | | |
 | bug09 | | | | |
