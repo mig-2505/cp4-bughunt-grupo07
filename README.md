@@ -13,7 +13,7 @@
 
 | Campo | |
 |---|---|
-| **Total de bugs corrigidos** | 9 / 12 |
+| **Total de bugs corrigidos** | 10 / 12 |
 | **Total de ajustes de Clean Code** | 1 / 6 |
 
 ---
@@ -34,7 +34,7 @@
 | bug07 | O sistema efetivava aluguel de conteúdos com disponivel = false | Usuario.java (método alugar): Não havia validação de disponibilidade | Adicionado um if(!c.isDisponivel()) estourando a exceção devida | Regras de negócio e lançamento de Exceções |
 | bug08 | A API aceitava cadastrar conteúdo com duração menor ou igual a zero | Conteudo.java: Falta de validação no construtor e no setter | Adicionado if (duracaoMinutos <= 0) lançando exceção | Blindagem de objetos / Validação de estado |
 | bug09 | Erro de idade retornava status 500 (Internal Server Error) genérico | ClassificacaoIndicativaException.java: Estava herdando de Exception (Checked), bloqueando o Handler do Spring | Alterado para estender RuntimeException | Exceções |
-| bug10 | | | | |
+| bug10 | Buscar ID inexistente (ex: 999) devolvia status 200 vazio em vez de erro | ConteudoController.java: Havia um bloco try/catch vazio que engolia a exceção | Removido o try/catch para que a exceção suba ao GlobalExceptionHandler | Tratamento de Exceções em Controllers |
 | bug11 | | | | |
 | bug12 | | | | |
 
