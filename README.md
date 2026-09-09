@@ -14,7 +14,7 @@
 | Campo | |
 |---|---|
 | **Total de bugs corrigidos** | 12 / 12 |
-| **Total de ajustes de Clean Code** | 2 / 6 |
+| **Total de ajustes de Clean Code** | 4 / 6 |
 
 ---
 
@@ -44,8 +44,8 @@
 |---|---|---|---|
 | clean01 | Classe Conteudo (método calcularPrecoAluguel()) | Violação de Abstração e Polimorfismo | Transformei o método calcularPrecoAluguel() em abstract e removi seu corpo |
 | clean02 | Conteudo.java (public int duracaoMinutos) | Encapsulamento. Atributos não devem ficar expostos | Alterado o modificador de acesso de public para private |
-| clean03 | | | |
-| clean04 | | | |
+| clean03 | Usuario.java (método alugar) | Nomes sem significado (Clean Names). Variáveis p e c não explicavam o contexto | Renomeei c para conteudo e p para preco |
+| clean04 | Usuario.java (método alugar) | Responsabilidade Única (SRP). Classes de Model não devem fazer I/O (imprimir no console) | Apaguei todo o bloco de System.out.println |
 | clean05 | | | |
 | clean06 | | | |
 
