@@ -35,10 +35,8 @@ public class Usuario {
     }
 
     public Usuario alugar(Conteudo c) throws ClassificacaoIndicativaException {
-        if (this.idade < c.getClassificacaoEtaria()) {
-            throw new ClassificacaoIndicativaException("Usuário de " + this.idade
-                    + " anos não pode assistir a " + c.getTitulo()
-                    + " (classificação " + c.getClassificacaoEtaria() + " anos)");
+        if (!c.isDisponivel()) {
+            throw new br.com.fiap.streamfiap.exception.ConteudoIndisponivelException(c.getTitulo() + " não está disponível para aluguel");
         }
 
         double p = c.calcularPrecoAluguel();
